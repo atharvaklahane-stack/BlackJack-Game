@@ -1,186 +1,86 @@
 import random
-print('\n'*50)
-print(r'''
-♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣
-        █▀▀ █   █▀█ █▀▀ █▄▀    █ █▀█ █▀▀ █▄▀ 
-        █▀▄ █▄▄ █▀█ █▄▄ █ █ ▄▄ █ █▀█ █▄▄ █ █ 
-♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠               
- __      __         __                                      __             
-/  \    /  \  ____ |  |   ____  ____   _____   ____       _/  |_   ____     
-\   \/\/   /_/ __ \|  | _/ ___\/  _ \ /     \_/ __ \      \   __\ /  _ \    
- \        / \  ___/|  |_\  \__(  <_> )  Y Y  \  ___/       |  |  (  <_> )   
-  \__/\  /   \___  >____/\___  >____/|__|_|  /\___  >      |__|_  \____/    
-       \/        \/          \/            \/     \/       /____/       
- __________ __                 __       __                 __        ________  ____ 
- \______   \  | _____    ____ |  |     |__|____    ____   |  | __    \_____  \/_   |
-  |    |  _/  | \__  \ _/ ___\|  |  _  |  \__  \ _/ ___\  |  |/ /     /  ____/ |   |
-  |    |   \  |__/ __ \\  \___|  |_( ) |  |/ __ \\  \___  |    <     /       \ |   |
-  |______  /____(____  /\___  >____/|__|  (____  /\___  > |__|_ \    \_______ \|___|
-         \/          \/     \/     \/          \/     \/       \/            \/''')
-def blackjack_game():
-    
-    nos=[11,2,3,4,5,6,7,8,9,10,10,10,10]
-    def card_get():
-        card=random.choice(nos)
-        return card
-    computer_cards=[]
-    user_cards=[]
-
+def blackjack():
+    nos = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+    c1=[]
+    c2=[]
     for i in range(2):
-        user_cards.append(card_get())
-        computer_cards.append(card_get())
-
-    u_score=sum(user_cards)
-    comp_score=sum(computer_cards)
-    def sum_cards():
-        print(f'User Cards {user_cards} | Sum: {u_score}')
-        print(f'Computer Cards {random.choice(computer_cards)}')
-
-
-    sum_cards()
-    if  u_score==21 and len(user_cards)==2:
-        print('=========================================')
-        print('''_____.___.               __      __.__         ._._._.
-    \__  |   | ____  __ __  /  \    /  \__| ____   | | | |
-    /   |   |/  _ \|  |  \ \   \/\/   /  |/    \  | | | |
-    \____   (  <_> )  |  /  \        /|  |   |  \  \|\|\|
-    / ______|\____/|____/    \__/\  / |__|___|  /  ______
-    \/                            \/          \/   \/\/\/''')
-        print('=========================================')
-        print("IT'S A BLACKJACK!!")
+        c1.append(random.choice(nos))
+        c2.append(random.choice(nos))
+    s1=sum(c1)
+    s2=sum(c2)
+    print(f"MY CARDS: {c1}| MY SCORE: {s1}")
+    print(f"DEALER'S 1ST CARD: {c2[0]}")
+    if s1==21 and len(c1)==2:
+        print("YOU WIN!!\nIT'S A BLACKJACK!!")
         return
-    a=input('''♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣
- 
-    Do you want to 'Hit'? 
-    [y] Yes, Hit me!
-    [n] No, I'll Stand.
- 
- ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠
- >''')
-
+    if s2==21 and len(c2)==2:
+        print('YOU LOSE!!\nTHE DEALER GOT THE BLACKJACK ')
+        return
+    
+    a=input("DO YOU WANT TO DRAW A CARD!!(Y/N)")
     for i in range(1):
-        if a =='y':
-            user_cards.append(card_get())
-            u_score=sum(user_cards)
-            if u_score>21 and 11 in user_cards:
-                user_cards[user_cards.index(11)] = 1
-                u_score=sum(user_cards)
-                print(f'''My Cards {user_cards} | My Score: {u_score}''')
-        elif a=='n':
-            print(f'''My Cards {user_cards} | My Score: {u_score}''')
-            print(f'''My Cards {computer_cards} | My Score: {comp_score}''')
+        if a =='Y':
+            c1.append(random.choice(nos))
+            s1=sum(c1)
+            print(c1)
+            print(s1)
+            if ((s1>21 and s2>21) and(s1==s2)):
+                print("BUST!!")
+                print(f"MY CARDS: {c1}| MY SCORE: {s1}")
+                print(f"DEALER'S CARDS: {c2}| DEALER'S SCORE: {s2}")
+            if s1>21:
+                if 11 in c1:
+                    c1.append(random.choice(nos))
+                    s1=sum(c1)
+                    c1[c1.index(11)]=1
+                    s1=sum(c1)
+                    print("YOU LOSE!!")
+                    print(f"MY CARDS: {c1}| MY SCORE: {s1}")
+                    print(f"DEALER'S CARDS: {c2}| DEALER'S SCORE: {s2}")
+                else:
+                    print("YOU LOSE!!")
+                    print(f"MY CARDS: {c1}| MY SCORE: {s1}")
+                    print(f"DEALER'S CARDS: {c2}| DEALER'S SCORE: {s2}")
+            elif s1<22 and s2<22:
+                if  s1<s2:
+                    print("YOU LOSE!!")
+                    print(f"MY CARDS: {c1}| MY SCORE: {s1}")
+                    print(f"DEALER'S CARDS: {c2}| DEALER'S SCORE: {s2}")
+                elif s2<s1:
+                    print("YOU WIN!!")
+                    print(f"MY CARDS: {c1}| MY SCORE: {s1}")
+                    print(f"DEALER'S CARDS: {c2}| DEALER'S SCORE: {s2}")
         else:
-            print(f'''My Cards {user_cards} | My Score: {u_score}''')
-            print(f'''My Cards {computer_cards} | My Score: {comp_score}''')
-    for i in range(1):
-        if  comp_score==21 and len(computer_cards)==2:
-            print('=========================================')
-            print('''_____.___.               __      __.__         ._._._.
-    \__  |   | ____  __ __  /  \    /  \__| ____   | | | |
-    /   |   |/  _ \|  |  \ \   \/\/   /  |/    \  | | | |
-    \____   (  <_> )  |  /  \        /|  |   |  \  \|\|\|
-    / ______|\____/|____/    \__/\  / |__|___|  /  ______
-    \/                            \/          \/   \/\/\/''')
-            print('=========================================')
-            print('DEALER GOT THE BLACKJACK!!')
-            return
-    if comp_score==u_score and u_score<=21:
-        print('''__________ ____ ___  _________ ___ ___  
-\______   \    |   \/   _____//   |   \ 
- |     ___/    |   /\_____  \/    ~    \
- |    |   |    |  / /        \    Y    /
- |____|   |______/ /_______  /\___|_  / 
-                           \/       \/  
-            We Both have an equal score''')
-    else:
-        while comp_score<17:
-            computer_cards.append(random.choice(nos))
-            comp_score = sum(computer_cards)
-            if comp_score < 17:
-                if comp_score>21 and 11 in computer_cards:
-                    computer_cards[computer_cards.index(11)] = 1
-                    comp_score = sum(computer_cards)
-                    print(f"Dealer's Cards {computer_cards} | Dealer's Score: {comp_score}")
-                    print(f"Dealer's Cards {user_cards} | Dealer's Score: {u_score}")
-                elif 10<comp_score<17:
-                    if computer_cards==11:
-                        computer_cards[computer_cards.index(11)] = 1
-                        comp_score = sum(computer_cards)
-                    print(f"Dealer's Cards {computer_cards} | Dealer's Score: {comp_score}")
-                    print(f"My Cards {user_cards} | My Score: {u_score}")
-        if comp_score==u_score:
-            print('''__________ ____ ___  _________ ___ ___  
-\______   \    |   \/   _____//   |   \ 
- |     ___/    |   /\_____  \/    ~   '\'
- |    |   |    |  / /        \    Y    /
- |____|   |______/ /_______  /\___|_  / 
-                           \/       \/  
-                We Both have an equal score''')
-            print(f"My Cards {user_cards} | My Score: {u_score}")
-            print(f"Dealer's Cards {computer_cards} | Dealer's Score: {comp_score}")
-        elif u_score>21:
-            print('=========================================')
-            print('''_____.___.              .____                         ._.
-\__  |   | ____  __ __  |    |    ____  ______ ____   | |
- /   |   |/  _ \|  |  \ |    |   /  _ \/  ___// __ \  | |
- \____   (  <_> )  |  / |    |__(  <_> )___ \\  ___/   \|
- / ______|\____/|____/  |_______ \____/____  >\___  >  __
- \/                             \/         \/     \/   \/''')
-            print('=========================================')
-            print(f"My Cards {user_cards} | My Score: {u_score}")
-            print(f"Dealer's Cards {computer_cards} | Dealer's Score: {comp_score}")
-        elif comp_score>21:
-            print('=========================================')
-            print('''_____.___.               __      __.__         ._._._.
-\__  |   | ____  __ __  /  \    /  \__| ____   | | | |
- /   |   |/  _ \|  |  \ \   \/\/   /  |/    \  | | | |
- \____   (  <_> )  |  /  \        /|  |   |  \  \|\|\|
- / ______|\____/|____/    \__/\  / |__|___|  /  ______
- \/                            \/          \/   \/\/\/''')
-            print('=========================================')
-            print(f"My Cards {user_cards} | My Score: {u_score}")
-            print(f"Dealer's Cards {computer_cards} | Dealer's Score: {comp_score}")
-        elif u_score>comp_score:
-            print('=========================================')
-            print('''_____.___.               __      __.__         ._._._.
-\__  |   | ____  __ __  /  \    /  \__| ____   | | | |
- /   |   |/  _ \|  |  \ \   \/\/   /  |/    \  | | | |
- \____   (  <_> )  |  /  \        /|  |   |  \  \|\|\|
- / ______|\____/|____/    \__/\  / |__|___|  /  ______
- \/                            \/          \/   \/\/\/''')
-            print('=========================================')
-            print(f"My Cards {user_cards} | My Score: {u_score}")
-            print(f"Dealer's Cards {computer_cards} | Dealer's Score: {comp_score}")
-        elif u_score<comp_score:
-            print('=========================================')
-            print('''_____.___.              .____                         ._.
-\__  |   | ____  __ __  |    |    ____  ______ ____   | |
- /   |   |/  _ \|  |  \ |    |   /  _ \/  ___// __ \  | |
- \____   (  <_> )  |  / |    |__(  <_> )___ \\  ___/   \|
- / ______|\____/|____/  |_______ \____/____  >\___  >  __
- \/                             \/         \/     \/   \/''')
-            print('=========================================')
-            print(f"My Cards {user_cards} | My Score: {u_score}")
-            print(f"Dealer's Cards {computer_cards} | Dealer's Score: {comp_score}")
-        elif u_score==comp_score and u_score>21:
-            print('=========================================')
-            print('''_____.___.              .____                         ._.
-\__  |   | ____  __ __  |    |    ____  ______ ____   | |
- /   |   |/  _ \|  |  \ |    |   /  _ \/  ___// __ \  | |
- \____   (  <_> )  |  / |    |__(  <_> )___ \\  ___/   \|
- / ______|\____/|____/  |_______ \____/____  >\___  >  __
- \/                             \/         \/     \/   \/''')
-            print('=========================================')
-            print("We Both have an equal score")
-            print(f"My Cards {user_cards} | My Score: {u_score}")
-            print(f"Dealer's Cards {computer_cards} | Dealer's Score: {comp_score}")
-if comp_score>21 and 11 in (computer_cards):
-        computer_cards[computer_cards.index(11)]=1
-        comp_score=sum(computer_cards)
-        print(f"DEALER'S SCORE: {comp_score}|DEALER'S CARDS: {computer_cards}")
-        print(f"MY SCORE: {u_score}|MY CARDS: {user_cards}")
+            while s2<17:
+                c2.append(random.choice(nos))
+                s2=sum(c2)
+                if s2>21 and 11 in c2:
+                    c2[c2.index(11)]=1
+                    s2=sum(c2)
+            if s2>21:
+                print("YOU WIN!!\n THE DEALER'S SCORE IS OVER 21!")
+                print(f"MY CARDS: {c1}| MY SCORE: {s1}")
+                print(f"DEALER'S CARDS: {c2}| DEALER'S SCORE: {s2}")
+            elif s2<22:
+                if s2>s1:
+                    print("YOU LOSE!!")
+                    print(f"MY CARDS: {c1}| MY SCORE: {s1}")
+                    print(f"DEALER'S CARDS: {c2}| DEALER'S SCORE: {s2}")
+                elif s2<s1:
+                    print("YOU WIN!!")
+                    print(f"MY CARDS: {c1}| MY SCORE: {s1}")
+                    print(f"DEALER'S CARDS: {c2}| DEALER'S SCORE: {s2}")
+                elif s1==s2:
+                    print("PUSH!!")
+                    print(f"MY CARDS: {c1}| MY SCORE: {s1}")
+                    print(f"DEALER'S CARDS: {c2}| DEALER'S SCORE: {s2}")
+        s2=sum(c2)
+        if s2>21 and 11 in c2:
+                c2[c2.index(11)]=1
+                s2=sum(c2)
+                print(f"MY CARDS: {c1}| MY SCORE: {s1}")
+                print(f"DEALER'S CARDS: {c2}| DEALER'S SCORE: {s2}")
 while input('''    ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ 
-    DO YOU WANT TO PLAY A GAME OF BLACKJACK? (y/n): ''') == 'y':
+    DO YOU WANT TO PLAY A GAME OF BLACKJACK? (y/n): ''') == 'Y':
     print("    ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠")
-
-    blackjack_game()
+    blackjack()
