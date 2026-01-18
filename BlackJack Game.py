@@ -174,7 +174,13 @@ def blackjack_game():
             print("We Both have an equal score")
             print(f"My Cards {user_cards} | My Score: {u_score}")
             print(f"Dealer's Cards {computer_cards} | Dealer's Score: {comp_score}")
+if comp_score>21 and 11 in (computer_cards):
+        computer_cards[computer_cards.index(11)]=1
+        comp_score=sum(computer_cards)
+        print(f"DEALER'S SCORE: {comp_score}|DEALER'S CARDS: {computer_cards}")
+        print(f"MY SCORE: {u_score}|MY CARDS: {user_cards}")
 while input('''    ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ ♠ ♥ ♦ ♣ 
     DO YOU WANT TO PLAY A GAME OF BLACKJACK? (y/n): ''') == 'y':
     print("    ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠ ♣ ♦ ♥ ♠")
+
     blackjack_game()
